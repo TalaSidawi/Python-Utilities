@@ -20,7 +20,12 @@ def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
     
     ##currently uses these fixed peaks for the gaussian fitting
     ##may change that later to automatically find the local peaks of the curve (especially for POE)
-    
+
+    peak1 = wl[15] #1730
+    peak2 = wl[31] #1762
+    peak3 = wl[51] #1802
+    peak4 = wl[102] #1904
+    peak5 = wl[124] #1948
     
     if polymer_type == 'EVA':
         peaks_list = [peak1,peak2,peak3,peak4,peak5]
