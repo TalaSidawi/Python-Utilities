@@ -52,6 +52,41 @@ def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
         
     return corrected_abs, baseline
 
+
+def water_calibration(ratio, architecture, polymer):
+    #glassglass
+#         y_406 = 0.02x + 0.016
+#         y_806 = 0.015x + 0.03
+#         y_TF4 = 0.009x + 0.013
+#         y_TF8 = -0.002x + 0.024
+    #glassbs
+#         y_406 = 0.023x + 0.069
+#         y_806 = 0.031x + 0.216
+#         y_TF4 = 0.039x + 0.026
+#         y_TF8 = 0.071x + 0.096
+
+    glassglassdict = {
+        '406': [0.02,0.016],
+        '806': [0.015,0.03],
+        'TF4': [0.009,0.013],
+        'TF8': [-0.002,0.024]
+    }
+
+
+    glassbsdict = {
+        '406': [0.024,0.058],
+        '806': [0.03,0.223],
+        'TF4': [0.072,0.011],
+        'TF8': [0.104,0.122]
+    }
+    
+    if architecture == 'GPOLYG':
+        x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
+        return x
+    elif architecture == 'GPOLYBS':
+        x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
+        return x
+
 from tqdm import tqdm
 def bscorrect_linescans(df):
 	#currently using mini bff
@@ -109,38 +144,3 @@ def bscorrect_linescans(df):
 							    )
 							)
 	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict
-
-
-def water_calibration(ratio, architecture, polymer):
-    #glassglass
-#         y_406 = 0.02x + 0.016
-#         y_806 = 0.015x + 0.03
-#         y_TF4 = 0.009x + 0.013
-#         y_TF8 = -0.002x + 0.024
-    #glassbs
-#         y_406 = 0.023x + 0.069
-#         y_806 = 0.031x + 0.216
-#         y_TF4 = 0.039x + 0.026
-#         y_TF8 = 0.071x + 0.096
-
-    glassglassdict = {
-        '406': [0.02,0.016],
-        '806': [0.015,0.03],
-        'TF4': [0.009,0.013],
-        'TF8': [-0.002,0.024]
-    }
-
-
-    glassbsdict = {
-        '406': [0.024,0.058],
-        '806': [0.03,0.223],
-        'TF4': [0.072,0.011],
-        'TF8': [0.104,0.122]
-    }
-    
-    if architecture == 'GPOLYG':
-        x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
-        return x
-    elif architecture == 'GPOLYBS':
-        x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
-        return x
