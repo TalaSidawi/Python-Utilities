@@ -139,3 +139,21 @@ def bscorrect_linescans(df):
 								    )
 								)
 	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict
+
+
+def getexpectedwater(t,rh,polymer_type):
+	inv_t = 1/(t + 273.15)
+	k = 8.617333e-5 #eV
+
+	solubilitydict = {
+	'406': [43.19284622, 0.28018506],
+	'806': [7.64233379E04, 4.99533970E-01],
+	'TF4': [0.87724685, 0.20267589],
+	'TF8': [0.99962712, 0.20842967]
+	}
+
+	c0 = solubilitydict[polymer_type][0]
+	dH = solubilitydict[polymer_type][1]
+
+	c_h2o = c0*np.exp(-dH*inv_t/k) * (rh/100) #g/cm3
+	return c_h2o*1000 #mg/cm3
