@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from .curveprocessing import rubberband
 
 
@@ -157,3 +158,7 @@ def getexpectedwater(t,rh,polymer_type):
 
 	c_h2o = c0*np.exp(-dH*inv_t/k) * (rh/100) #g/cm3
 	return c_h2o*1000 #mg/cm3
+
+
+def test(a,b):
+	return a+b
