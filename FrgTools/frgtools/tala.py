@@ -159,6 +159,5 @@ def getexpectedwater(t,rh,polymer_type):
 	c_h2o = c0*np.exp(-dH*inv_t/k) * (rh/100) #g/cm3
 	return c_h2o*1000 #mg/cm3
 
-
-def test(a,b):
-	return a+b
+def new_test():
+	return "Hey! New Testing! Please work! If works, then make sure to commit changes and then restart VS Code, not just re-import :)"
