@@ -141,6 +141,12 @@ def bscorrect_linescans(df):
 								)
 	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict
 
+#correctedAbs_dict,baselineAbs_dict,wardRatio_dict = tala.bscorrect_linescans(df)
+# df['corrected_abs_avg'] = df.apply(lambda x: np.mean(correctedAbs_dict[x.name],axis = 1),axis = 1)
+# df['baseline_abs_avg'] = df.apply(lambda x: np.mean(baselineAbs_dict[x.name],axis = 1), axis = 1)
+# # df['gaussian_fit_avg'] = df.apply(lambda x: np.mean(gaussianfit_dict[x.name],axis = 1), axis = 1)
+# df['WaRD Water'] = df.apply(lambda x: wardRatio_dict[x.name], axis = 1)
+
 
 def getexpectedwater(t,rh,polymer_type):
 	inv_t = 1/(t + 273.15)
