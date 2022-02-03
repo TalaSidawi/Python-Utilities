@@ -535,3 +535,36 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
     
     
     return corrected_abs, baseline, curves
+
+
+def bscorrected(df):
+    correctedAbs_list = []
+    baselineAbs_list = []
+    gaussian_fit_list = []
+
+        
+    for _, row in df.iterrows():
+        correctedAbs, baselineAbs, curves = bifacial_fitfull(row['wl'], row['r'], row['polymer_type'], row['sampleName'], plot = False)
+        correctedAbs_list.append(correctedAbs)
+        baselineAbs_list.append(baselineAbs)
+        best_fit = list(curves[row['sampleName']]['Best_Fit']['Abs'])
+        gaussian_fit_list.append(best_fit)
+
+    def wardRatio(ch2_peak, h2o_peak):
+        return (h2o_peak/ch2_peak)
+
+    wl = np.array(df['wl'][0])
+
+    ratios_list = []
+
+    for _, row2 in df.iterrows():
+        ch2_peak = row2['gaussian_fit'][np.where(wl == 1730)[0][0]]
+        h2o_peak = row2['gaussian_fit'][np.where(wl == 1904)[0][0]]
+        
+        ratio = wardRatio(ch2_peak, h2o_peak)
+        
+        ratios_list.append(ratio)
+
+    return correctedAbs_list, baselineAbs_list, gaussian_fit_list, ratios_list
+
+#correctedAbs_list, baselineAbs_list, gaussian_fit_list, ratios_list = ward.bscorrected(df)
