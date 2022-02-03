@@ -97,7 +97,7 @@ def bscorrect_linescans(df):
 
 	for _,row in tqdm(df.iterrows()):
 		for ii in row['r']:
-			corrected, baseline = mini_bff(row['wl'], ii, 'EVA', row['label'], plot = False)
+			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot = False)
 			correctedAbs_list.append(corrected)
 			baselineAbs_list.append(baseline)
 	
