@@ -557,6 +557,8 @@ def bscorrected(df):
 
     ratios_list = []
 
+    df['gaussian_fit'] = gaussian_fit_list
+
     for _, row2 in df.iterrows():
         ch2_peak = row2['gaussian_fit'][np.where(wl == 1730)[0][0]]
         h2o_peak = row2['gaussian_fit'][np.where(wl == 1904)[0][0]]
