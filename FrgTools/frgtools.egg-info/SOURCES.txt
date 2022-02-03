@@ -6,10 +6,15 @@ frgtools/imageprocessing.py
 frgtools/jv.py
 frgtools/misc.py
 frgtools/plotting.py
+frgtools/profilometry.py
+frgtools/raman.py
+frgtools/tala.py
 frgtools/tolerancefactor.py
 frgtools/uvvis.py
 frgtools/ward.py
+frgtools/xrd.py
 frgtools.egg-info/PKG-INFO
 frgtools.egg-info/SOURCES.txt
 frgtools.egg-info/dependency_links.txt
+frgtools.egg-info/requires.txt
 frgtools.egg-info/top_level.txt
