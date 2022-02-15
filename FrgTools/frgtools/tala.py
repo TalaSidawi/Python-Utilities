@@ -55,6 +55,8 @@ def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
 
 
 def water_calibration(ratio, architecture, polymer):
+	#this function takes the absorbance ratio between 1900/1730 as y and returns x, the equivalent water concentration 
+
 	#glassglass
 	#         y_406 = 0.02x + 0.016
 	#         y_806 = 0.015x + 0.03
@@ -80,6 +82,10 @@ def water_calibration(ratio, architecture, polymer):
 	'TF4': [0.072,0.011],
 	'TF8': [0.104,0.122]
 	}
+
+	if polymer in ['EVA', 'POE']:
+		print('Incorrect input, specify type of EVA or POE')
+		return
     
 	if architecture == 'GPOLYG':
 		x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
@@ -167,3 +173,42 @@ def getexpectedwater(t,rh,polymer_type):
 
 def new_test():
 	return "Hey! New Testing! Please work! If works, then make sure to commit changes and then restart VS Code, not just re-import :)"
+
+
+
+def fit_threepointbifacial(wavelengths, reflectance, architecture, plot = False):
+	wl_eva = 1730
+	wl_h2o = 1902
+	wl_ref = 1872
+
+	if np.mean(reflectance) > 1:
+		reflectance = reflectance / 100
+	ab = -np.log(reflectance)	#convert reflectance values to absorbance
+
+	allWavelengthsPresent = True
+	missingWavelength = None
+	for each in [wl_eva, wl_h2o, wl_ref]:
+		if each not in wavelengths:
+			allWavelengthsPresent = False
+			missingWavelength = each
+			break
+
+	if not allWavelengthsPresent:
+		print('Wavelength Error: Necessary wavelength {0} missing from dataset - cannot fit.'.format(missingWavelength))
+		return
+
+	evaIdx = np.where(wavelengths == wl_eva)[0][0]
+	h2oIdx = np.where(wavelengths == wl_h2o)[0][0]
+	refIdx = np.where(wavelengths == wl_ref)[0][0]
+	
+	ratio = np.divide(ab[h2oIdx]-ab[refIdx], ab[evaIdx]-ab[refIdx])
+
+	h2o_meas = water_calibration(
+					ratio,
+					architecture,
+					'406'
+					)
+	# h2o[h2o < 0] = 0	
+	## Avg Reflectance Fitting
+	# avgRef = np.mean(ref, axis = 2)
+	return h2o_meas
