@@ -54,7 +54,7 @@ def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
 	return corrected_abs, baseline
 
 
-def water_calibration(ratio, architecture, polymer):
+def water_calibration(ratio, architecture, polymer, alt_cal = False):
 	#this function takes the absorbance ratio between 1900/1730 as y and returns x, the equivalent water concentration 
 
 	#glassglass
@@ -68,34 +68,41 @@ def water_calibration(ratio, architecture, polymer):
 	#         y_TF4 = 0.039x + 0.026
 	#         y_TF8 = 0.071x + 0.096
 
-	glassglassdict = {
-	'406': [0.02,0.016],
-	'806': [0.015,0.03],
-	'TF4': [0.009,0.013],
-	'TF8': [-0.002,0.024]
-	}
+	if alt_cal == True:
+		p1 = 24.75
+		p2 = 0.3461
+		x = (ratio - p2)/p1
+		return x
+
+	else:
+		glassglassdict = {
+		'406': [0.02,0.016],
+		'806': [0.015,0.03],
+		'TF4': [0.009,0.013],
+		'TF8': [-0.002,0.024]
+		}
 
 
-	glassbsdict = {
-	'406': [0.024,0.058],
-	'806': [0.03,0.223],
-	'TF4': [0.072,0.011],
-	'TF8': [0.104,0.122]
-	}
+		glassbsdict = {
+		'406': [0.024,0.058],
+		'806': [0.03,0.223],
+		'TF4': [0.072,0.011],
+		'TF8': [0.104,0.122]
+		}
 
-	if polymer in ['EVA', 'POE']:
-		print('Incorrect input, specify type of EVA or POE')
-		return
-    
-	if architecture == 'GPOLYG':
-		x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
-	elif architecture == 'GPOLYBS':
-		x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
+		if polymer in ['EVA', 'POE']:
+			print('Incorrect input, specify type of EVA or POE')
+			return
 		
-	return x
+		if architecture == 'GPOLYG':
+			x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
+		elif architecture == 'GPOLYBS':
+			x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
+			
+		return x
 
 from tqdm import tqdm
-def bscorrect_linescans(df):
+def bscorrect_linescans(df,alt_cal = False):
 	#currently using mini bff
 	correctedAbs_list = []
 	baselineAbs_list = []
@@ -141,9 +148,10 @@ def bscorrect_linescans(df):
 			#         wardRatio_dict[i].append(cali_406(gaussianfit_dict[i][pos][102]/gaussianfit_dict[i][pos][15]))
 			wardRatio_dict[i].append(water_calibration(
 								correctedAbs_dict[i][pos][102]/correctedAbs_dict[i][pos][15],
-								  df['architecture'][0],
-								    pol
-								    )
+								df['architecture'][0],
+								pol,
+								alt_cal
+								)
 								)
 	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict
 
