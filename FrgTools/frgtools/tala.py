@@ -71,7 +71,7 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 	if alt_cal == True:
 		p1 = 24.75
 		p2 = 0.3461
-		x = (ratio - p1)/p2
+		x = (ratio - p2)/p1
 		return x
 
 	else:
