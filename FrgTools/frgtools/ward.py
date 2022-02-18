@@ -522,11 +522,11 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
             
     # Initiate a dict to store curves and errors
     # Run the initial fit         
-    # curves = {} 
-    # errors = {}
-    # best_vals, temp_curves, amplitudes, centers, areas, sigmas, maxima, run_name, temp_errors = initial_fit(initial_vals)
-    # curves[run_name] = temp_curves
-    # errors[run_name] = temp_errors
+    curves = {} 
+    errors = {}
+    best_vals, temp_curves, amplitudes, centers, areas, sigmas, maxima, run_name, temp_errors = initial_fit(initial_vals)
+    curves[run_name] = temp_curves
+    errors[run_name] = temp_errors
 
     # # call the iterative fitting function
     # fit_all(best_vals, curves, amplitudes, areas, initial_vals, errors)
