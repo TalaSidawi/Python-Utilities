@@ -537,7 +537,7 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
     return corrected_abs, baseline#, curves
 
 
-def bscorrected(df):
+def bscorrected(df, plot = False):
     correctedAbs_list = []
     baselineAbs_list = []
     # gaussian_fit_list = []
@@ -545,7 +545,7 @@ def bscorrected(df):
         
     for _, row in df.iterrows():
         # correctedAbs, baselineAbs, curves = bifacial_fitfull(row['wl'], row['r'], row['polymer_type'], row['sampleName'], plot = False)
-        correctedAbs, baselineAbs = bifacial_fitfull(row['wl'], row['r'], row['polymer_type'], row['sampleName'], plot = False)
+        correctedAbs, baselineAbs = bifacial_fitfull(row['wl'], row['r'], row['polymer_type'], row['sampleName'], plot)
         correctedAbs_list.append(correctedAbs)
         baselineAbs_list.append(baselineAbs)
         # best_fit = list(curves[row['sampleName']]['Best_Fit']['Abs'])
