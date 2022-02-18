@@ -534,7 +534,7 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
     # call the function. Unless the second arg is 'True', this function will not execute
     
     
-    return corrected_abs, baseline, curves
+    return corrected_abs, baseline#, curves
 
 
 def bscorrected(df, plot = False):
