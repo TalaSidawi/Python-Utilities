@@ -244,7 +244,7 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
                     # starting at the specified spectrum 
                     'lower_bound' : 1700, # Lowest wavelength of fitting domain
                     'upper_bound' : 2000, # Highest wavelength of fitting domain
-                    'Fixed_Peaks' : [peaks_list[-1]], # Peaks not allowed to move during the fit
+                    'Fixed_Peaks' : [1700], # Peaks not allowed to move during the fit
                     'Mobile_Peaks' : peaks_list,# Peaks allowed to move during the fit
                     'tolerance' : 4.0, # Amount allowed to deviate from peaks defined above 
                     'min_amplitude' : 0.01, # Define minimum amplitude. Get this value from SingleSpecFit
