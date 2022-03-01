@@ -5,7 +5,7 @@ from .curveprocessing import rubberband
 
 
 def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
-    
+    #creates a mini friend for tala
     	####step 1, remove baseline using rubber band method, added to frgtools.curveprocessing
 	
 	wl = np.array(wavelengths)
