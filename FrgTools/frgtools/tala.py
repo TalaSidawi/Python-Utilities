@@ -103,7 +103,7 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 		return x
 
 from tqdm import tqdm
-def bscorrect_linescans(df,alt_cal = False):
+def bscorrect_linescans(df,alt_cal = False, plot = False):
 	#currently using mini bff
 	correctedAbs_list = []
 	baselineAbs_list = []
@@ -111,7 +111,7 @@ def bscorrect_linescans(df,alt_cal = False):
 
 	for _,row in tqdm(df.iterrows()):
 		for ii in row['r']:
-			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot = False)
+			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
 			correctedAbs_list.append(corrected)
 			baselineAbs_list.append(baseline)
 	
