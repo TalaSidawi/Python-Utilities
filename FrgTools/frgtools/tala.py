@@ -27,6 +27,7 @@ def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
 		peaks_list = [peak1,peak2,peak3,peak4,peak5]
 	elif polymer_type == 'POE':
 		peaks_list = [peak1,peak2,peak3,peak4]
+	print(peaks_list)
 
 	if plot == True:
 		fig, ax = plt.subplots(1,2, figsize = (8,3))
