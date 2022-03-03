@@ -45,7 +45,7 @@ def mini_bff(wavelengths, reflectance, polymer_type, sampleName, plot = False):
 		fig.suptitle(sampleName, y = 1.05)
 
 		for i in peaks_list:
-			ypeak = corrected_abs[np.where(wl == i)][0]
+			ypeak = corrected_abs[np.where(wl == i)[0][0]][0]
 			ax[1].plot(np.ones((2,))*i,[0,ypeak], linestyle = '--', color = 'g')
 
 		plt.tight_layout()
