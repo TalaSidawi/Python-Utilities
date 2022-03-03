@@ -182,11 +182,11 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
     ##may change that later to automatically find the local peaks of the curve (especially for POE)
     
     peak1 = np.where(wl == 1730)[0][0] #1730
-	peak2 = np.where(wl == 1762)[0][0] #1762
-	peak3 = np.where(wl == 1802)[0][0] #1802
-	peak4 = np.where(wl == 1904)[0][0] #1904
-	peak5 = np.where(wl == 1948)[0][0] #1948
-    
+    peak2 = np.where(wl == 1762)[0][0] #1762
+    peak3 = np.where(wl == 1802)[0][0] #1802
+    peak4 = np.where(wl == 1904)[0][0] #1904
+    peak5 = np.where(wl == 1948)[0][0] #1948
+	
     if polymer_type == 'EVA':
         peaks_list = [peak1,peak2,peak3,peak4,peak5]
     elif polymer_type == 'POE':
