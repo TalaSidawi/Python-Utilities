@@ -166,6 +166,7 @@ from lmfit.models import GaussianModel
 from scipy import stats
 import pandas as pd
 from .curveprocessing import rubberband
+import numpy as np
 
 def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = False):
     
@@ -180,11 +181,11 @@ def bifacial_fitfull(wavelengths, reflectance, polymer_type, sampleName, plot = 
     ##currently uses these fixed peaks for the gaussian fitting
     ##may change that later to automatically find the local peaks of the curve (especially for POE)
     
-    peak1 = wl[15] #1730
-    peak2 = wl[31] #1762
-    peak3 = wl[51] #1802
-    peak4 = wl[102] #1904
-    peak5 = wl[124] #1948
+    peak1 = np.where(wl == 1730)[0][0] #1730
+	peak2 = np.where(wl == 1762)[0][0] #1762
+	peak3 = np.where(wl == 1802)[0][0] #1802
+	peak4 = np.where(wl == 1904)[0][0] #1904
+	peak5 = np.where(wl == 1948)[0][0] #1948
     
     if polymer_type == 'EVA':
         peaks_list = [peak1,peak2,peak3,peak4,peak5]
