@@ -110,6 +110,11 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 	baselineAbs_list = []
 	gaussian_fit_list = []
 
+	wl = df['wl'][0]
+
+	idx_ch2 = np.where(wl == 1730)[0][0]
+	idx_h2o = np.where(wl == 1902)[0][0]
+
 	for _,row in tqdm(df.iterrows()):
 		for ii in row['r']:
 			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
@@ -149,7 +154,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 		for pos in range(len(df['r'][0])):
 			#         wardRatio_dict[i].append(cali_406(gaussianfit_dict[i][pos][102]/gaussianfit_dict[i][pos][15]))
 			wardRatio_dict[i].append(water_calibration(
-								correctedAbs_dict[i][pos][102]/correctedAbs_dict[i][pos][15],
+								correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2],
 								df['architecture'][0],
 								pol,
 								alt_cal
