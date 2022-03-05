@@ -102,6 +102,7 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 			x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
 			
 		return x
+#note, currently only doing 406 for the water calibration, doesn't even read specific type of polymer
 
 from tqdm import tqdm
 def bscorrect_linescans(df,alt_cal = False, plot = False):
