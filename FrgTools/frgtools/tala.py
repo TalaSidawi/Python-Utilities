@@ -131,6 +131,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 	baselineAbs_dict = {}
 	# gaussianfit_dict = {}
 	wardRatio_dict = {}
+	wardWater_dict = {}
 
 	if df['polymer'][0] == 'EVA':
 		pol = '406'
@@ -141,6 +142,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 		x = i+1
 
 		wardRatio_dict[i] = []
+		wardWater_dict[i] = []
 
 		if i+1 >= len(s):
 			correctedAbs_dict[i] = correctedAbs_list[s[i]:]
@@ -152,15 +154,15 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 			#         gaussianfit_dict[i] = gaussian_fit_list[s[i]:s[x]]
 
 		for pos in range(len(df['r'][0])):
-			#         wardRatio_dict[i].append(cali_406(gaussianfit_dict[i][pos][102]/gaussianfit_dict[i][pos][15]))
-			wardRatio_dict[i].append(water_calibration(
+			wardRatio_dict.append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
+			wardWater_dict[i].append(water_calibration(
 								correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2],
 								df['architecture'][0],
 								pol,
 								alt_cal
 								)
 								)
-	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict
+	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
 
 #correctedAbs_dict,baselineAbs_dict,wardRatio_dict = tala.bscorrect_linescans(df)
 # df['corrected_abs_avg'] = df.apply(lambda x: np.mean(correctedAbs_dict[x.name],axis = 1),axis = 1)
