@@ -124,7 +124,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 	s = []
 	for i in range(len(df)):
 		s.append(len(df['position'][0])*i)
-	print(s)
+	# print(s)
 	
 	
 	correctedAbs_dict = {}
