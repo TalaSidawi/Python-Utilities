@@ -98,10 +98,13 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 		
 		if architecture == 'GPOLYG':
 			x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
+			return x
 		elif architecture == 'GPOLYBS':
 			x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
+			return x
+		else:
+			return 'fuck you'
 			
-		return x
 
 from tqdm import tqdm
 def bscorrect_linescans(df,alt_cal = False, plot = False):
