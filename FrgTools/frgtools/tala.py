@@ -113,42 +113,30 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 	baselineAbs_dict = {}
 	wardRatio_dict = {}
 	wardWater_dict = {}
-	wl = df['wl'][0]
-
-	idx_ch2 = np.where(wl == 1730)[0][0]
-	idx_h2o = np.where(wl == 1902)[0][0]
 
 	for _,row in tqdm(df.iterrows()):
-		correctedAbs_dict[row['label']] = []
-		baselineAbs_dict[row['label']] = []
-		wardRatio_dict[row['label']] = []
-		wardWater_dict[row['label']] = []
+		wl = row['wl']
+		idx_ch2 = np.where(wl == 1730)[0][0]
+		idx_h2o = np.where(wl == 1902)[0][0]
+		name = row['label']
+		correctedAbs_dict[name] = []
+		baselineAbs_dict[name] = []
+		wardRatio_dict[name] = []
+		wardWater_dict[name] = []
 		for e,ii in enumerate(row['r']):
-			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
-			correctedAbs_dict[row['label']].append(corrected)
-			baselineAbs_dict[row['label']].append(baseline)
-			wardRatio_dict[row['label']].append(correctedAbs_dict[row['label']][e][idx_h2o]/correctedAbs_dict[row['label']][e][idx_ch2])
-			wardWater_dict[row['label']].append(water_calibration(
-								correctedAbs_dict[row['label']][e][idx_h2o]/correctedAbs_dict[row['label']][e][idx_ch2],
+			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], name, plot)
+			correctedAbs_dict[name].append(corrected)
+			baselineAbs_dict[name].append(baseline)
+			wardRatio_dict[name].append(correctedAbs_dict[name][e][idx_h2o]/correctedAbs_dict[name][e][idx_ch2])
+			wardWater_dict[name].append(water_calibration(
+								correctedAbs_dict[name][e][idx_h2o]/correctedAbs_dict[name][e][idx_ch2],
 								row['architecture'],
-								row['polymer'],
+								row['polymer_type'],
 								alt_cal
 								)
 								)
 	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
 	
-
-	# 	for pos in range(len(df['r'][0])):
-	# 		wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
-	# 		wardWater_dict[i].append(water_calibration(
-	# 							correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2],
-	# 							df['architecture'][0],
-	# 							pol,
-	# 							alt_cal
-	# 							)
-	# 							)
-	# return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
-
 #correctedAbs_dict,baselineAbs_dict,wardRatio_dict = tala.bscorrect_linescans(df)
 # df['corrected_abs_avg'] = df.apply(lambda x: np.mean(correctedAbs_dict[x.name],axis = 1),axis = 1)
 # df['baseline_abs_avg'] = df.apply(lambda x: np.mean(baselineAbs_dict[x.name],axis = 1), axis = 1)
