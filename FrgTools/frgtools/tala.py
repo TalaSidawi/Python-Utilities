@@ -127,14 +127,14 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
 			correctedAbs_dict[row['label']].append(corrected)
 			baselineAbs_dict[row['label']].append(baseline)
-		wardRatio_dict[e].append(correctedAbs_dict[row['label']][e][idx_h2o]/correctedAbs_dict[row['label']][e][idx_ch2])
-		wardWater_dict[e].append(water_calibration(
-							correctedAbs_dict[row['label']][e][idx_h2o]/correctedAbs_dict[row['label']][e][idx_ch2],
-							row['architecture'],
-							row['polymer'],
-							alt_cal
-							)
-							)
+		wardRatio_dict[row['label']].append(correctedAbs_dict[row['label']][e][idx_h2o]/correctedAbs_dict[row['label']][e][idx_ch2])
+		# wardWater_dict[e].append(water_calibration(
+		# 					correctedAbs_dict[row['label']][e][idx_h2o]/correctedAbs_dict[row['label']][e][idx_ch2],
+		# 					row['architecture'],
+		# 					row['polymer'],
+		# 					alt_cal
+		# 					)
+		# 					)
 	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
 	
 
