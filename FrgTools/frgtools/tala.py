@@ -157,7 +157,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 			#         gaussianfit_dict[i] = gaussian_fit_list[s[i]:s[x]]
 
 		for pos in range(len(df['r'][0])):
-			wardRatio_dict.append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
+			wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
 			wardWater_dict[i].append(water_calibration(
 								correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2],
 								df['architecture'][0],
