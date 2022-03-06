@@ -162,6 +162,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 			print(idx_h2o)
 			print(idx_ch2)
 			print(correctedAbs_dict)
+			return correctedAbs_dict
 			break
 			wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
 			wardWater_dict[i].append(water_calibration(
