@@ -156,16 +156,10 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 			baselineAbs_dict[i] = baselineAbs_list[s[i]:s[x]]
 			#         gaussianfit_dict[i] = gaussian_fit_list[s[i]:s[x]]
 
-		for pos in range(len(df['r'][0])):
-			print(i)
-			print(pos)
-			print(idx_h2o)
-			print(idx_ch2)
-			print(correctedAbs_dict)
-			return correctedAbs_dict
-			break
-			wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
-			wardWater_dict[i].append(water_calibration(
+		for e in range(len(df['r'])):
+			for pos in df['r'][e]:
+				wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
+				wardWater_dict[i].append(water_calibration(
 								correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2],
 								df['architecture'][0],
 								pol,
