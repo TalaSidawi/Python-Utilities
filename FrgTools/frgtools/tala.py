@@ -120,8 +120,6 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 
 	for _,row in tqdm(df.iterrows()):
 		for ii in row['r']:
-			print(len(ii))
-			print(len(row['wl']))
 			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
 			correctedAbs_list.append(corrected)
 			baselineAbs_list.append(baseline)
