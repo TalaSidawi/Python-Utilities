@@ -156,18 +156,16 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 			baselineAbs_dict[i] = baselineAbs_list[s[i]:s[x]]
 			#         gaussianfit_dict[i] = gaussian_fit_list[s[i]:s[x]]
 
-		for e in range(len(df['r'])):
-			for pos in range(len(df['r'][e])):
-				print(len(correctedAbs_dict[i][pos]))
-				wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
-				wardWater_dict[i].append(water_calibration(
+		for pos in range(len(df['r'][0])):
+			wardRatio_dict[i].append(correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2])
+			wardWater_dict[i].append(water_calibration(
 								correctedAbs_dict[i][pos][idx_h2o]/correctedAbs_dict[i][pos][idx_ch2],
 								df['architecture'][0],
 								pol,
 								alt_cal
 								)
 								)
-	return correctedAbs_dict#, baselineAbs_dict, wardRatio_dict, wardWater_dict
+	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
 
 #correctedAbs_dict,baselineAbs_dict,wardRatio_dict = tala.bscorrect_linescans(df)
 # df['corrected_abs_avg'] = df.apply(lambda x: np.mean(correctedAbs_dict[x.name],axis = 1),axis = 1)
