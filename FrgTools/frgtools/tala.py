@@ -109,10 +109,10 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 from tqdm import tqdm
 def bscorrect_linescans(df,alt_cal = False, plot = False):
 	#currently using mini bff
-	correctedAbs_list = []
-	baselineAbs_list = []
-	gaussian_fit_list = []
-
+	correctedAbs_dict = {}
+	baselineAbs_dict = {}
+	wardRatio_dict = {}
+	wardWater_dict = {}
 	wl = df['wl'][0]
 
 	idx_ch2 = np.where(wl == 1730)[0][0]
@@ -121,20 +121,16 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 	for _,row in tqdm(df.iterrows()):
 		for ii in row['r']:
 			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
-			correctedAbs_list.append(corrected)
-			baselineAbs_list.append(baseline)
-	
+			correctedAbs_dict[row['label']].append(corrected)
+			baselineAbs_dict[row['label']].append(baseline)
+	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
 	s = []
 	for i in range(len(df)):
 		s.append(len(df['position'][0])*i)
 	print(s)
 	
 	
-	correctedAbs_dict = {}
-	baselineAbs_dict = {}
-	# gaussianfit_dict = {}
-	wardRatio_dict = {}
-	wardWater_dict = {}
+
 
 	if df['polymer'][0] == 'EVA':
 		pol = '406'
