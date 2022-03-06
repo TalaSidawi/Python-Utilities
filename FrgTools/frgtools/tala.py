@@ -119,9 +119,9 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 	idx_h2o = np.where(wl == 1902)[0][0]
 
 	for _,row in tqdm(df.iterrows()):
+		correctedAbs_dict[row['label']] = []
+		baselineAbs_dict[row['label']] = []
 		for ii in row['r']:
-			correctedAbs_dict[row['label']] = []
-			baselineAbs_dict[row['label']] = []
 			corrected, baseline = mini_bff(row['wl'], ii, row['polymer'], row['label'], plot)
 			correctedAbs_dict[row['label']].append(corrected)
 			baselineAbs_dict[row['label']].append(baseline)
