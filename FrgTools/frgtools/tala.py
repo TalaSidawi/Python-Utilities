@@ -172,7 +172,7 @@ def bscorrect_linescans(df,alt_cal = False, plot = False):
 								alt_cal
 								)
 								)
-	return correctedAbs_dict, baselineAbs_dict, wardRatio_dict, wardWater_dict
+	return correctedAbs_dict#, baselineAbs_dict, wardRatio_dict, wardWater_dict
 
 #correctedAbs_dict,baselineAbs_dict,wardRatio_dict = tala.bscorrect_linescans(df)
 # df['corrected_abs_avg'] = df.apply(lambda x: np.mean(correctedAbs_dict[x.name],axis = 1),axis = 1)
