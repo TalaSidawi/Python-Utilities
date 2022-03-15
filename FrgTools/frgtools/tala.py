@@ -59,8 +59,8 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 	#this function takes the absorbance ratio between 1900/1730 as y and returns x, the equivalent water concentration 
 
 	#glassglass
-	#         y_406 = 0.02x + 0.016
-	#         y_806 = 0.015x + 0.03
+	#		y_406 = 0.014x + 0.021
+	#		y_806 = 0.011x + 0.034
 	#         y_TF4 = 0.009x + 0.013
 	#         y_TF8 = -0.002x + 0.024
 	#glassbs
@@ -86,8 +86,11 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 
 
 		glassbsdict = {
-		'406': [0.024,0.058],
-		'806': [0.03,0.223],
+		# '406': [0.024,0.058],
+		# '806': [0.03,0.223],
+		#BIG note, changed glass BS dict for the fig 2 pvsc file, i wanted to use GG calibration because technically no bs
+		'406': [0.014,0.021],
+		'806': [0.011,0.034],
 		'TF4': [0.072,0.011],
 		'TF8': [0.104,0.122]
 		}
