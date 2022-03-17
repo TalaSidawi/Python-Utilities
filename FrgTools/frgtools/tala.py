@@ -103,6 +103,7 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 			x = (ratio - glassglassdict[polymer][1])/glassglassdict[polymer][0]
 			return x
 		elif architecture == 'GPOLYBS':
+			print(polymer, architecture, glassbsdict[polymer][1], glassbsdict[polymer][0])
 			x = (ratio - glassbsdict[polymer][1])/glassbsdict[polymer][0]
 			return x
 		else:
