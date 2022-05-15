@@ -78,11 +78,6 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 
 	else:
 		glassglassdict = {
-		# '406': [0.02,0.016],
-		# '806': [0.015,0.03],
-		# 'TF4': [0.009,0.013],
-		# 'TF8': [-0.002,0.024]
-		# }
 
 		#GG dict as of 4/28/22
 		'406': [0.02284,0.00317],
@@ -92,20 +87,15 @@ def water_calibration(ratio, architecture, polymer, alt_cal = False):
 		}
 		
 		glassbsdict = {
-		# '406': [0.024,0.058],
-		# '806': [0.03,0.223],
-		#BIG note, changed glass BS dict for the fig 2 pvsc file, i wanted to use GG calibration because technically no bs
-		# '406': [0.014,0.021],
-		# '806': [0.011,0.034],
-		# 'TF4': [0.072,0.011],
-		# 'TF8': [0.104,0.122]
-		# }
-
+		#y_406 = 0.01741x + 0.03712
+		# y_806 = 0.03444x + 0.07498
+		# y_TF4 = 0.00287x + 0.02262
+		# y_TF8 = 0.01873x + 0.09765
 		#GBS dict as of 4/28/22
-		'406': [0.02742,0.00841],
-		'806': [0.02437,0.12653],
-		'TF4': [0.00105,0.0282],
-		'TF8': [0.0101,0.11007]
+		'406': [0.01741,0.03712],
+		'806': [0.03444,0.07498],
+		'TF4': [0.00287,0.02262],
+		'TF8': [0.01873,0.0976]
 		}
 
 		if polymer in ['EVA', 'POE']:
