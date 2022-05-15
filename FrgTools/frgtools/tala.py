@@ -173,8 +173,8 @@ def getexpectedwater(t,rh,polymer_type):
 	#new calibration below, as of 4/24/22
 	'406': [10.01530793,0.22649281],
 	'806': [70.55601517,0.27894601],
-	'TF4': [6.24753597, 0.20918644],
-	'TF8': [0.800104, 0.14545619]
+	'TF4': [0.48172078, 0.17849866],
+	'TF8': [0.60779957, 0.18669524]
 	}
 	c0 = solubilitydict[polymer_type][0]
 	dH = solubilitydict[polymer_type][1]
